@@ -11,6 +11,7 @@ it's that simple! just create new userscript on tampermonkey or whatever you're 
 // @version -
 // @description snipe anyone on any game!! rosnipe but working!
 // @author Melishy
+// @license MIT
 // @match https://www.roblox.com/games/*
 // @require https://raw.githubusercontent.com/Melishy/rosniper/refs/heads/main/userscript.js
 // @grant none
