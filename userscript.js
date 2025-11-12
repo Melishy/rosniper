@@ -3,13 +3,13 @@
   let TARGET_FOUND = false;
 
   const ERROR_MESSAGES = {
-    400: "400 Bad Request\ninvalid parameters or request body, check your input though",
-    401: "401 Unauthorized\nauthentication issue (rare btw)",
-    403: "403 Forbidden\naccess denied, possibly due to banned content or restrictions",
-    404: "404 Not Found\nuser or server doesn't exist, double-check the username please",
-    429: "429 Too Many Requests\nyou're sniping your target too much, please give it some time and try again",
-    500: "500 Internal Server Error\nprobably roblox's backend issue, so wait and try again",
-    503: "Service Unavailable\nroblox could be down, so give it some time and try one more time",
+    400: "400 Bad Request\nInvalid parameters or request body, check your input though",
+    401: "401 Unauthorized\nAuthentication issue (rare)",
+    403: "403 Forbidden\nAccess Denied, possibly due to banned content or restrictions",
+    404: "404 Not Found\nUser or server doesn't exist, double-check the username",
+    429: "429 Too Many Requests\nYou're sniping your target too much, wait a bit and snipe again",
+    500: "500 Internal Server Error\nProbably Roblox's backend issue, so wait and try again",
+    503: "Service Unavailable\nRoblox could be down, so wait a bit and snipe again",
   };
 
   const CONFIG = {
