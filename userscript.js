@@ -38,6 +38,7 @@
     const attemptRequest = async (backoff = 0) => {
       try {
         clearTimeout(timeoutId);
+
         const res = await fetch(url, {
           ...options,
           signal: controller.signal,
@@ -260,6 +261,7 @@
 
       if (!serversRes || !serversRes.data || serversRes.data.length === 0) {
         setStatus(`No servers found on page ${pageNum}`);
+
         return {
           found: false,
           error: "No servers found",
@@ -286,6 +288,7 @@
       servers.sort((a, b) => {
         const playerDiff = b.playerTokens.length - a.playerTokens.length;
         if (playerDiff !== 0) return playerDiff;
+
         return (a.ping || 999) - (b.ping || 999);
       });
 
@@ -295,6 +298,7 @@
 
       for (const server of servers) {
         serverMap[server.id] = server;
+
         for (const token of server.playerTokens) {
           allTokens.push(token);
           requestIds.push(server.id);
@@ -327,6 +331,7 @@
         const batchPromises = batchGroup.map((batch) =>
           processBatch(batch, targetUrl, setStatus)
         );
+
         const results = await Promise.all(batchPromises);
         const matchResult = results.find((r) => r?.found);
 
@@ -381,6 +386,7 @@
 
         return {
           found: false,
+          error: "Target not found in any server",
         };
       }
     } catch (error) {
@@ -391,6 +397,7 @@
         `${errorMsg}\nUps! An unknown error occurred, try again soon`;
 
       setStatus(fullMsg);
+
       return {
         found: false,
         error: errorMsg,
@@ -406,8 +413,10 @@
       const userId = await getUserId(name);
       if (!userId) {
         setStatus("User not found");
+
         return cb({
           found: false,
+          error: "User not found",
         });
       }
 
@@ -415,8 +424,10 @@
 
       if (!thumbUrl) {
         setStatus("Could not get profile image");
+
         return cb({
           found: false,
+          error: "Could not get profile image",
         });
       }
 
@@ -427,16 +438,25 @@
 
       if (result.found) {
         setStatus("Target found!");
+
         cb(result);
       } else if (!TARGET_FOUND && !result.error) {
         setStatus("Target not found in any server");
         cb({
           found: false,
+          error: "Target not found in any server",
         });
       } else if (TARGET_FOUND) {
         setStatus("Target found elsewhere");
+
         cb({
-          found: true,
+          found: false,
+          error: "Target found elsewhere",
+        });
+      } else {
+        cb({
+          found: false,
+          error: result.error || "Search failed",
         });
       }
     } catch (error) {
@@ -553,13 +573,15 @@
 
           joinBtn.style.display = "inline-block";
           joinBtn.onclick = () => {
-            if (window.Roblox?.GameLauncher) {
+            if (window.Roblox?.GameLauncher && result.place?.id) {
               window.Roblox.GameLauncher.joinGameInstance(
                 placeId,
                 result.place.id
               );
             } else {
-              error("Roblox.GameLauncher not available, please join the game manually");
+              error(
+                "Roblox.GameLauncher not available or no server ID, please join the game manually"
+              );
             }
           };
         },
