@@ -253,7 +253,7 @@
 
     try {
       setStatus(
-        `Loading servers page ${pageNum}. Cursor: ${cursor || "initial"}`
+        `Loading servers page ${pageNum}. Cursor: ${cursor.slice(0, 5)}... || "initial"}`
       );
 
       await delay(100);
