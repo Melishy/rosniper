@@ -165,7 +165,6 @@
   const normalizeUrl = (url) => url.split("?")[0];
   const processBatch = async (batch, targetUrl, setStatus) => {
     try {
-      setStatus(`Starting batch with ${batch.tokens.length} tokens`);
       const profileRes = await fetchThumbs(batch.tokens, batch.requestIds);
 
       if (!profileRes?.data) {
