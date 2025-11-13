@@ -1,14 +1,3 @@
-// ==UserScript==
-// @name RoSniper
-// @namespace a26bb31c-a3c0-4b2c-916a-19b68ff0cf79
-// @version -
-// @description snipe anyone on any game!! rosnipe but working!
-// @author Melishy
-// @license MIT
-// @match https://www.roblox.com/games/*
-// @grant none
-// ==/UserScript==
-
 (function () {
   "use strict";
 
